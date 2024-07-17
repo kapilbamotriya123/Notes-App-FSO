@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content":"This is again a test note from kapil sent via rest client in vs code",
+    "important":true
+}
