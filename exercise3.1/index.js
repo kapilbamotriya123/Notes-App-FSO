@@ -2,12 +2,13 @@ const express= require("express")
 const morgan = require("morgan")
 const app = express()
 
-
+//using the middle ware json parsor
 app.use(express.json())
 
 morgan.token(`body`,(request) => JSON.stringify(request.body))
 const customFormat = ':method :url :status :res[content-length] - :response-time ms :body';
 app.use(morgan(customFormat))
+
 let persons = [
     { 
       "id": "1",
@@ -31,11 +32,13 @@ let persons = [
     }
 ]
 
+
 const generateId = () => {
     const maxId = persons.length > 0
         ?Math.max(...persons.map(person=>Number(person.id)))
         :0
-    console.log("this is maxid: ",maxId) 
+    
+    
     return (maxId + 1)
 }
 ``
@@ -45,7 +48,7 @@ app.get('/api/persons',(request,response) => {
 
 app.get('/api/persons/:id',(request,response)=> {
     const id = request.params.id
-    console.log(id)
+    
     const person = persons.find(person=>person.id===id)
     if(!person) {
         response.status(404).end()
@@ -53,7 +56,7 @@ app.get('/api/persons/:id',(request,response)=> {
     response.json(person)
 })
 
-app.get('/info',(request,response) =>{navigator
+app.get('/info',(request,response) =>{
     response.send(
         `<p>The phonebook has ${persons.length} people</p>
         <br/>
@@ -99,7 +102,7 @@ app.post('/api/persons',(request,response) => {
     }
 
     persons = persons.concat(person)
-    console.log(persons)
+    
     response.json(person)
 })
 const PORT = 3001

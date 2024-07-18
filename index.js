@@ -60,7 +60,7 @@ const generateId = () => {
   }
 
 app.post('/api/notes',(request,response) => {
-  const body = request.body
+  const body = request.body//json parser the data json data into java script object and makes it possible to changes the propertyof object here whcih is not possible with the json formated string 
   if(!body.content) {
     return  response.status(404).json({
         error:'content-missing'
